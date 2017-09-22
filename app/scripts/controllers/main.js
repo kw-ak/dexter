@@ -10,6 +10,7 @@
 angular.module('dexterApp')
   .controller('MainCtrl', function ($scope, Restangular) {
 
+    $scope.limit = 10;
     var query = {
       dataset : 'top-500-des-cds-les-plus-empruntes-a-la-bibliotheque-de-toulouse',
       rows: -1
@@ -24,6 +25,7 @@ angular.module('dexterApp')
     var best = {};
     var allTime = {};
 
+    $scope.spinner = {active : true};
     //le base url est définir dans le module de config
     Restangular.one("/").get(query).then(function(data){
         $scope.nhits = data.nhits;
@@ -41,19 +43,15 @@ angular.module('dexterApp')
               //pass
             }else {
               //sinon on stocke le meilleur artiste
-              best[item.fields.annee] = {'year':item.fields.annee, 'artist': item.fields.auteur, 'nb': item.fields.nbre_de_prets}
+              best[item.fields.annee] = {'item': item.fields, 'nb': item.fields.nbre_de_prets}
             }
 
-            /* petit test pour verifier que le champs cote est bien unique et correspond a un seul CD
-            if(item.fields.cote === '099.2 OGR'){
-              console.log(item);
-            }
-            */
 
-            if (item.fields.cote in allTime) {
-              allTime[item.fields.cote].nb += item.fields.nbre_de_prets;
+            var current_key = item.fields.auteur + '/' + item.fields.titre;
+            if (current_key in allTime) {
+              allTime[current_key].nb += item.fields.nbre_de_prets;
             } else {
-              allTime[item.fields.cote] = {
+              allTime[current_key] = {
                   'item': item.fields,
                   'nb' : item.fields.nbre_de_prets
                 };
@@ -61,8 +59,7 @@ angular.module('dexterApp')
 
 
         });
-        //allTime  = _.sortBy(allTime, ['nb'], ['desc']);
-        console.log(allTime);
+
         //on transforme les données pour le chart
         _.each(perYearCounter, function(value, key) {
           $scope.labels.push(key);
@@ -71,5 +68,11 @@ angular.module('dexterApp')
         //on copie dans le scope pour y accéder dans le tableau
         $scope.bestPerYear = best;
         $scope.allTime = _.sortBy(allTime, ['nb']);
+        $scope.spinner = {active : false};
+    },
+    function(data) {
+        $scope.spinner = {active : false};
+        alert("ERROR!!");
+        // Handle error here
     });
   });

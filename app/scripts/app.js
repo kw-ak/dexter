@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'config',
     'restangular',
-    'chart.js'
+    'chart.js',
+    'treasure-overlay-spinner'
   ])
   .config(function ($routeProvider, RestangularProvider, ENV) {
     $routeProvider

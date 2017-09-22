@@ -1,58 +1,70 @@
-<button type="button" class="btn btn-primary">
-  <span class="glyphicon glyphicon-cd"> Total-hits </span>
-  <span ng-if="nhits" ng-bind="nhits" class="badge"></span>
-  <span ng-if="!nhits"> - </span>
-</button>
-<hr />
+<treasure-overlay-spinner active='spinner.active'>
+  <button type="button" class="btn btn-primary">
+    <span class="glyphicon glyphicon-cd"> Total-albums </span>
+    <span ng-if="nhits" ng-bind="nhits" class="badge"></span>
+    <span ng-if="!nhits"> - </span>
+  </button>
+  <hr />
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">TOP {{limit}} Meilleurs albums de tout temps</div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th> Artiste </th>
+            <th> Album </th>
+            <th>Emprunts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in allTime | orderBy:'-nb' | limitTo: limit">
+            {{row}}
+            <td ng-bind="$index + 1"></td>
+            <td ng-bind="row.item.auteur"></td>
+            <td ng-bind="row.item.titre"></td>
+            <td ng-bind="row.nb"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="panel-footer">
+        <button type="button" class="btn btn-info btn-block" ng-click="limit = limit + 10">
+          <span class="glyphicon glyphicon-chevron-down"> Plus... </span>
+        </button>
+      </div>
+  </div>
 
 
   <div class="panel panel-default">
-    <div class="panel-heading">Meilleurs artistes de tout temps</div>
+    <div class="panel-heading">Nombre d'emprunts par année</div>
+    <div class="panel-body">
+      <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Meilleur album sur une année</div>
 
     <table class="table">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Artiste | Titre </th>
+          <th>Année</th>
+          <th>Artiste</th>
+          <th>Album</th>
           <th>Nb d'emprunts</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in allTime | orderBy:'-nb' | limitTo: 10">
-          {{row}}
-          <td ng-bind="$index + 1"></td>
-          <td ng-bind="row.item.auteur + ' | ' + row.item.titre "></td>
+        <tr ng-repeat="row in bestPerYear">
+          <td ng-bind="row.item.annee"></td>
+          <td ng-bind="row.item.auteur"></td>
+          <td ng-bind="row.item.titre"></td>
           <td ng-bind="row.nb"></td>
         </tr>
       </tbody>
     </table>
-</div>
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">Nombre d'emprunts par année</div>
-  <div class="panel-body">
-    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
   </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">Meilleur artiste par année</div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Année</th>
-        <th>Artiste</th>
-        <th>Nb d'emprunts</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in bestPerYear">
-        <td ng-bind="row.year"></td>
-        <td ng-bind="row.artist"></td>
-        <td ng-bind="row.nb"></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+</treasure-overlay-spinner>

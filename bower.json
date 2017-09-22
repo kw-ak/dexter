@@ -11,7 +11,8 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "restangular": "^1.6.1",
-    "angular-chart.js": "^1.1.1"
+    "angular-chart.js": "^1.1.1",
+    "angular-treasure-overlay-spinner": "^1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
