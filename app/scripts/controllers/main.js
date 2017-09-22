@@ -14,10 +14,27 @@ angular.module('dexterApp')
       dataset : 'top-500-des-cds-les-plus-empruntes-a-la-bibliotheque-de-toulouse',
       rows: -1
     };
+
+    $scope.labels = [];
+    $scope.series = ['S1'];
+    $scope.data = [];
+
+
+    var counter = {};
     Restangular.one("/").get(query).then(function(data){
         $scope.nhits = data.nhits;
         _.each(data.records, function(item) {
-          console.log(item.recordid);
+            if (item.fields.annee in counter){
+              counter[item.fields.annee] += item.fields.nbre_de_prets;
+            } else {
+              counter[item.fields.annee] = item.fields.nbre_de_prets;
+            }
+          //console.log(item.recordid);
+        });
+
+        _.each(counter, function(value, key) {
+          $scope.labels.push(key);
+          $scope.data.push(value);
         });
     });
   });

@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'config',
-    'restangular'
+    'restangular',
+    'chart.js'
   ])
   .config(function ($routeProvider, RestangularProvider, ENV) {
     $routeProvider
