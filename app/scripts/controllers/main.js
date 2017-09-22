@@ -10,5 +10,14 @@
 angular.module('dexterApp')
   .controller('MainCtrl', function ($scope, Restangular) {
 
-    Restangular.one('test').get();
+    var query = {
+      dataset : 'top-500-des-cds-les-plus-empruntes-a-la-bibliotheque-de-toulouse',
+      rows: -1
+    };
+    Restangular.one("/").get(query).then(function(data){
+        $scope.nhits = data.nhits;
+        _.each(data.records, function(item) {
+          console.log(item.recordid);
+        });
+    });
   });
