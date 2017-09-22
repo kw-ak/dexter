@@ -1,11 +1,34 @@
-NbHits : {{nhits}}
-<br />
-<br />
+<button type="button" class="btn btn-primary">
+  <span class="glyphicon glyphicon-cd"> Total-hits </span>
+  <span ng-if="nhits" ng-bind="nhits" class="badge"></span>
+  <span ng-if="!nhits"> - </span>
+</button>
+<hr />
 
-  <div class="panel panel-default">
-              <div class="panel-heading">Nombre d'emprunts par année</div>
-              <div class="panel-body">
-                <canvas class="chart chart-line" chart-data="data" chart-labels="labels"
-                	chart-series="series"></canvas>
-              </div>
+<div class="panel panel-default">
+  <div class="panel-heading">Nombre d'emprunts par année</div>
+  <div class="panel-body">
+    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
   </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Meilleur artiste par année</div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Année</th>
+        <th>Artiste</th>
+        <th>Nb d'emprunts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in bestPerYear">
+        <td ng-bind="row.year"></td>
+        <td ng-bind="row.artist"></td>
+        <td ng-bind="row.nb"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
