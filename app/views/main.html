@@ -5,6 +5,30 @@
 </button>
 <hr />
 
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Meilleurs artistes de tout temps</div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Artiste | Titre </th>
+          <th>Nb d'emprunts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in allTime | orderBy:'-nb' | limitTo: 10">
+          {{row}}
+          <td ng-bind="$index + 1"></td>
+          <td ng-bind="row.item.auteur + ' | ' + row.item.titre "></td>
+          <td ng-bind="row.nb"></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
 <div class="panel panel-default">
   <div class="panel-heading">Nombre d'emprunts par année</div>
   <div class="panel-body">
