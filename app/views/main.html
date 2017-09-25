@@ -7,7 +7,7 @@
   <hr />
 
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-init="limit = 10">
       <div class="panel-heading">TOP {{limit}} Meilleurs albums de tout temps</div>
 
       <table class="table">
@@ -41,7 +41,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">Nombre d'emprunts par année</div>
     <div class="panel-body">
-      <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+      <canvas class="chart chart-line" chart-data="myLineChart.data" chart-labels="myLineChart.labels" ></canvas>
     </div>
   </div>
 

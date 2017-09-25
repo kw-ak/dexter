@@ -19,7 +19,9 @@ angular
     'config',
     'restangular',
     'chart.js',
-    'treasure-overlay-spinner'
+    'treasure-overlay-spinner',
+    'opendata',
+    'spinnerbtn'
   ])
   .config(function ($routeProvider, RestangularProvider, ENV) {
     $routeProvider
