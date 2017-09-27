@@ -21,9 +21,10 @@ angular
     'chart.js',
     'treasure-overlay-spinner',
     'opendata',
+    'extractors',
     'spinnerbtn'
   ])
-  .config(function ($routeProvider, RestangularProvider, ENV) {
+  .config(function($routeProvider, RestangularProvider, ENV) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -39,5 +40,5 @@ angular
         redirectTo: '/'
       });
 
-      RestangularProvider.setBaseUrl(ENV.api);
+    RestangularProvider.setBaseUrl(ENV.api);
   });

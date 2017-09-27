@@ -7,41 +7,40 @@
   <hr />
 
 
-    <div class="panel panel-default" ng-init="limit = 10">
-      <div class="panel-heading">TOP {{limit}} Meilleurs albums de tout temps</div>
+  <div class="panel panel-default" ng-init="limit = 10">
+    <div class="panel-heading">TOP <span ng-bing="limit"></span> Meilleurs albums de tout temps</div>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th> Artiste </th>
-            <th> Album </th>
-            <th>Emprunts</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="row in allTime | orderBy:'-nb' | limitTo: limit">
-            {{row}}
-            <td ng-bind="$index + 1"></td>
-            <td ng-bind="row.item.auteur"></td>
-            <td ng-bind="row.item.titre"></td>
-            <td ng-bind="row.nb"></td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th> Artiste </th>
+          <th> Album </th>
+          <th>Emprunts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in allTime | orderBy:'-nb' | limitTo: limit">
+          <td ng-bind="$index + 1"></td>
+          <td ng-bind="row.item.auteur"></td>
+          <td ng-bind="row.item.titre"></td>
+          <td ng-bind="row.nb"></td>
+        </tr>
+      </tbody>
+    </table>
 
-      <div class="panel-footer">
-        <button type="button" class="btn btn-info btn-block" ng-click="limit = limit + 10">
+    <div class="panel-footer">
+      <button type="button" class="btn btn-info btn-block" ng-click="limit = limit + 10">
           <span class="glyphicon glyphicon-chevron-down"> Plus... </span>
         </button>
-      </div>
+    </div>
   </div>
 
 
   <div class="panel panel-default">
     <div class="panel-heading">Nombre d'emprunts par année</div>
     <div class="panel-body">
-      <canvas class="chart chart-line" chart-data="myLineChart.data" chart-labels="myLineChart.labels" ></canvas>
+      <canvas class="chart chart-line" chart-data="myLineChart.data" chart-labels="myLineChart.labels"></canvas>
     </div>
   </div>
 
