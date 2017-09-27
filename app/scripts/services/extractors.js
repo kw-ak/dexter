@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 angular.module('extractors', [])
   .service('extractors', function() {
@@ -27,13 +27,13 @@ angular.module('extractors', [])
         /*
          * ALL TIME
          */
-        var current_key = item.fields.auteur + '/' + item.fields.titre;
-        if (current_key in allTime) {
-          allTime[current_key].nb += item.fields.nbre_de_prets;
+        var currentKey = item.fields.auteur + '/' + item.fields.titre;
+        if (currentKey in allTime) {
+          allTime[currentKey].nb += item.fields.nbreDePrets;
         } else {
-          allTime[current_key] = {
+          allTime[currentKey] = {
             'item': item.fields,
-            'nb': item.fields.nbre_de_prets
+            'nb': item.fields.nbreDePrets
           };
         }
 
@@ -42,9 +42,9 @@ angular.module('extractors', [])
          */
         //si il existe dans le dico on aggrège le nombre, sinon on créer une nouvelle entrée dans le dico
         if (item.fields.annee in perYearCounter) {
-          perYearCounter[item.fields.annee] += item.fields.nbre_de_prets;
+          perYearCounter[item.fields.annee] += item.fields.nbreDePrets;
         } else {
-          perYearCounter[item.fields.annee] = item.fields.nbre_de_prets;
+          perYearCounter[item.fields.annee] = item.fields.nbreDePrets;
         }
 
 
@@ -52,10 +52,10 @@ angular.module('extractors', [])
          * BEST OF EACH YEAR
          */
         //si il n'existe pas ou qu'il a un nombre d'emprunts supérieur on le stocke
-        if (!(item.fields.annee in bestSellerByYear) || item.fields.nbre_de_prets > bestSellerByYear[item.fields.annee].nb) {
+        if (!(item.fields.annee in bestSellerByYear) || item.fields.nbreDePrets > bestSellerByYear[item.fields.annee].nb) {
           bestSellerByYear[item.fields.annee] = {
             'item': item.fields,
-            'nb': item.fields.nbre_de_prets
+            'nb': item.fields.nbreDePrets
           };
         }
 

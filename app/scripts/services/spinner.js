@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 angular.module('spinnerbtn', [])
   .service('spinnerBtn', function($rootScope) {

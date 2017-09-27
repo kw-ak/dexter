@@ -28,6 +28,6 @@ angular.module('dexterApp')
       //Error handler
       function() {
         spinnerBtn.off();
-        window.alert("ERROR!!");
+        window.alert('ERROR!!');
       });
   });
